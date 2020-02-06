@@ -1,0 +1,19 @@
+{
+  "name": "modern-web-development",
+  "version": "1.0.0",
+  "description": "Develop a modern web using express for Node.js, Vue.js, and mongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/homeless-leesky/Modern-web-development.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/homeless-leesky/Modern-web-development/issues"
+  },
+  "homepage": "https://github.com/homeless-leesky/Modern-web-development#readme"
+}

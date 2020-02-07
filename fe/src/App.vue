@@ -88,23 +88,16 @@ export default {
       items: [
         {
           icon: 'home',
-          title: 'home',
+          title: '홈',
           to: {
             path: '/'
           }
         },
         {
-          icon: 'info',
-          title: 'about',
+          icon: 'supervisor_account',
+          title: '사용자관리',
           to: {
-            path: '/about'
-          }
-        },
-        {
-          icon: 'help',
-          title: 'help',
-          to: {
-            path: '/help'
+            path: '/user'
           }
         }
       ],

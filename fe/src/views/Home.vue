@@ -7,7 +7,6 @@
 export default {
   name: 'home',
   mounted () {
-    alert('MAIN PAGE입니다.')
   }
 }
 

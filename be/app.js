@@ -38,3 +38,65 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+
+
+
+const mongoose = require('mongoose');
+const userSchema = new mongoose.Schema({
+  name: {type : String, default: ''},
+  age: {type : Number, default: 1},
+})
+
+const User = mongoose.model('User', userSchema);
+
+mongoose.connect('mongodb://localhost:27017/mongoTEST', {useNewUrlParser : true, useUnifiedTopology: true},(err) => {
+  if(err) return console.error(err);
+  console.log('mongoose connected')
+
+
+  // ---------create-------------
+  // User.create({name : "leesky"}).then((r) => {
+  //   console.log(r);
+  // }).catch((e) => {
+  //   console.error(e)
+  // }) 
+  
+  //---------read---------------
+  // User.find().then((r) => {
+  //     console.log("test: ",r);
+  // }).catch((e) => {
+  //   console.error(e)
+  // })
+
+  //--------update---------------
+  // User.updateOne({
+  //   _id: '5e3d2ec959f9495cdc78ef99'
+  // },{
+  //   $set: {
+  //     age: 22
+  //   }
+  // }).then((r) => { //promise에 대한 공부
+  //   console.log('test: ',r);
+  //   console.log('updated')
+  //   return User.find()
+  // }).then((r) => {
+  //   console.log(r)
+  // }).catch((e) => {
+  //   console.error(e)
+  // })
+
+  //--------delete-----------------
+  User.deleteOne({
+    name : 'leesky'
+  }).then((r)=>{
+    console.log(r)
+    return User.find()
+  }).then((r) => {
+    console.log(r)
+  }).catch((e)=>{
+    console.error(e)
+  })
+})
+
+
+

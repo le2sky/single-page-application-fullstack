@@ -1,5 +1,12 @@
 <template>
   <div class="e404">
-    <h1>404 page not found</h1>
+    <v-alert
+      text
+      prominent
+      type="error"
+      icon="mdi-cloud-alert"
+    >
+    sorry page not found : 404
+    </v-alert>
   </div>
 </template>

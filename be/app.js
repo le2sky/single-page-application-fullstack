@@ -42,17 +42,13 @@ module.exports = app;
 
 
 const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
-  name: {type : String, default: ''},
-  age: {type : Number, default: 1},
-})
+const User = require('./models/users');
 
-const User = mongoose.model('User', userSchema);
+
 
 mongoose.connect('mongodb://localhost:27017/mongoTEST', {useNewUrlParser : true, useUnifiedTopology: true},(err) => {
   if(err) return console.error(err);
   console.log('mongoose connected')
-
 
   // ---------create-------------
   // User.create({name : "leesky"}).then((r) => {
@@ -86,16 +82,22 @@ mongoose.connect('mongodb://localhost:27017/mongoTEST', {useNewUrlParser : true,
   // })
 
   //--------delete-----------------
-  User.deleteOne({
-    name : 'leesky'
-  }).then((r)=>{
-    console.log(r)
-    return User.find()
-  }).then((r) => {
-    console.log(r)
-  }).catch((e)=>{
-    console.error(e)
-  })
+  // User.deleteOne({
+  //   name : 'leesky'
+  // }).then((r)=>{
+  //   console.log(r)
+  //   return User.find()
+  // }).then((r) => {
+  //   console.log(r)
+  // }).catch((e)=>{
+  //   console.error(e)
+  // })
+
+  // User.deleteMany().then((r)=>{
+  //   console.log(r)
+  // }).catch((e)=>{
+  //   console.error(e)
+  // })
 })
 
 

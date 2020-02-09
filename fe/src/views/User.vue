@@ -403,7 +403,7 @@ export default {
       this.dialog = false
       // console.log(this.userName, this.userAge0)
       this.pop(this.userName)
-      axios.post('http://localhost:3000/api/user/', {
+      axios.post('/api/user/', {
         name: this.userName,
         age: this.userAge
       }).then((r) => {
@@ -415,7 +415,7 @@ export default {
       })
     },
     getUsers () {
-      axios.get('http://localhost:3000/api/user/').then((r) => {
+      axios.get('/api/user/').then((r) => {
         this.users = r.data.users
       }).catch((e) => {
         this.pop('user를 불러오는데 실패하였습니다.')
@@ -428,7 +428,7 @@ export default {
       this.userName = ''
     },
     putUser () {
-      axios.put(`http://localhost:3000/api/user/${this.putId}`, {
+      axios.put(`/api/user/${this.putId}`, {
         name: this.userName, age: this.userAge
       }).then((r) => {
         this.pop('사용자 수정 완료')
@@ -444,7 +444,7 @@ export default {
     },
     delUser () {
       // console.log(id)
-      axios.delete(`http://localhost:3000/api/user/${this.delId}`).then((r) => {
+      axios.delete(`/api/user/${this.delId}`).then((r) => {
         this.pop('사용자 삭제 완료')
         this.getUsers()
         this.delDialog = false

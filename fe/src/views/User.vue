@@ -155,7 +155,7 @@
         <!-- event가 발생할때마다 페이지를 렌더링하니깐 이건 mounted 됐을떄 초기값으로 설정해야겠다.-->
         <v-card
           class="mx-auto"
-          :color= "ranColor()" 
+          :color= "ranColor()"
           dark
           max-width="400"
         >

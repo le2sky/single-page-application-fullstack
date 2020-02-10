@@ -29,7 +29,7 @@
     ;
     <v-app-bar
       :clipped-left="clipped"
-      color="indigo darken-3"
+      color="indigo lighten-1"
       dense
       dark
       app
@@ -104,7 +104,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: this.$apiRootPath
+      title: 'homeless-leesy'
     }
   }
 }

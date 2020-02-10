@@ -5,6 +5,7 @@
         height="400"
         hide-delimiter-background
         show-arrows-on-hover
+        class="mb-2"
       >
       <v-carousel-item
         v-for="(slide, i) in slides"

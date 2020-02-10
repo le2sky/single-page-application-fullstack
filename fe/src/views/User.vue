@@ -1,5 +1,20 @@
 <template>
   <v-container grid-list-md text-xs-center>
+    <v-parallax
+      class="mb-1"
+      dark
+      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+    >
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-col class="text-center" cols="12">
+          <h1 class="display-1 font-weight-thin mb-4">사용자관리 API</h1>
+          <h4 class="subheading font-weight-thin">사용자를 마음껏 추가,수정,삭제 해보세요!</h4>
+        </v-col>
+      </v-row>
+    </v-parallax>
     <v-layout row wrap>
       <!-- test text-fileds -->
       <!--
@@ -135,10 +150,10 @@
 
         </v-card>
       </v-flex> -->
-      <v-flex xs12 sm4 v-for= 'user in users' :key="user._id">
+      <v-flex xs12 sm6 md4 lg3 xl2  v-for= 'user in users' :key="user._id">
         <v-card
           class="mx-auto"
-          color="blue lighten-1"
+          :color= "ranColor()"
           dark
           max-width="400"
         >
@@ -175,9 +190,13 @@
             </v-list-item>
           <v-card-actions
           >
-            <v-btn text color="orange" @click="putDialog(user._id)">수정</v-btn>
-            <!-- <v-btn text color="error" @click="delUser(user._id)">삭제</v-btn> -->
-            <v-btn text color="error" @click="delDia(user._id)">삭제</v-btn>
+            <v-col
+              align="center"
+            >
+              <v-btn small class="mx-1" color="grey darken-1" @click="putDialog(user._id)">수정</v-btn>
+              <v-btn small class="mx-1" color="grey darken-1" @click="delDia(user._id)">삭제</v-btn>
+              <!-- <v-btn text color="error" @click="delUser(user._id)">삭제</v-btn> -->
+            </v-col>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -456,6 +475,31 @@ export default {
     pop (msg) {
       this.snackbar = true
       this.sbMsg = msg
+    },
+    ranColor () {
+      const ran = Math.floor(Math.random() * 9 + 1)
+      console.log(ran)
+      if (ran === 1) {
+        return `red accent-1`
+      } else if (ran === 2) {
+        return 'pink accent-1'
+      } else if (ran === 3) {
+        return 'purple lighten-1'
+      } else if (ran === 4) {
+        return 'deep-purple lighten-1'
+      } else if (ran === 5) {
+        return 'blue lighten-1'
+      } else if (ran === 6) {
+        return 'cyan lighten-1'
+      } else if (ran === 7) {
+        return 'green lighten-1'
+      } else if (ran === 8) {
+        return 'lime lighten-1'
+      } else if (ran === 9) {
+        return 'blue-grey darken-2'
+      } else {
+        return 'grey lighten-1'
+      }
     }
   }
 }

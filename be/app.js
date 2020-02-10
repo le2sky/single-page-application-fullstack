@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(cors());
+if(process.env.NODE_ENV !== 'production') app.use(cors())
 app.use('/api', require('./routes/api'));
 app.use(history());
 app.use(express.static(path.join(__dirname,'../','fe', 'dist')));

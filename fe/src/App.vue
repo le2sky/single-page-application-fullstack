@@ -104,7 +104,7 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'LEESKY'
+      title: this.$apiRootPath
     }
   }
 }

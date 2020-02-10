@@ -356,6 +356,7 @@ export default {
   mounted () {
     for (let i = 10; i < 40; i++) this.userAges.push(i)
     this.getUsers()
+    console.log(this.$apiRootPath)
   },
   methods: {
     // restAPi test
@@ -403,7 +404,7 @@ export default {
       this.dialog = false
       // console.log(this.userName, this.userAge0)
       this.pop(this.userName)
-      axios.post('/api/user/', {
+      axios.post(`${this.$apiRootPath}user/`, {
         name: this.userName,
         age: this.userAge
       }).then((r) => {
@@ -415,7 +416,7 @@ export default {
       })
     },
     getUsers () {
-      axios.get('/api/user/').then((r) => {
+      axios.get(`${this.$apiRootPath}user/`).then((r) => {
         this.users = r.data.users
       }).catch((e) => {
         this.pop('user를 불러오는데 실패하였습니다.')
@@ -428,7 +429,7 @@ export default {
       this.userName = ''
     },
     putUser () {
-      axios.put(`/api/user/${this.putId}`, {
+      axios.put(`${this.$apiRootPath}user/${this.putId}`, {
         name: this.userName, age: this.userAge
       }).then((r) => {
         this.pop('사용자 수정 완료')
@@ -444,7 +445,7 @@ export default {
     },
     delUser () {
       // console.log(id)
-      axios.delete(`/api/user/${this.delId}`).then((r) => {
+      axios.delete(`${this.$apiRootPath}user/${this.delId}`).then((r) => {
         this.pop('사용자 삭제 완료')
         this.getUsers()
         this.delDialog = false

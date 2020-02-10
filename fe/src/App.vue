@@ -29,7 +29,7 @@
     ;
     <v-app-bar
       :clipped-left="clipped"
-      color="blue"
+      color="indigo darken-3"
       dense
       dark
       app
@@ -70,8 +70,8 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-footer :fixed="fixed" app>
-      <span>&copy; 2020</span>
+    <v-footer :fixed="fixed" app >
+      <span>&copy; 2020@homeless-leesky</span>
     </v-footer>
   </v-app>
 </template>

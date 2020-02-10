@@ -99,6 +99,4 @@ mongoose.connect('mongodb://localhost:27017/mongoTEST', {useNewUrlParser : true,
   //   console.error(e)
   // })
 })
-
-
-
+console.log(`[NOTICE] ${process.env.NODE_ENV} 모드로 서버가 실행되었습니다.`)

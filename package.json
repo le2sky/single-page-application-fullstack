@@ -4,7 +4,10 @@
   "description": "Develop a modern web using express for Node.js, Vue.js, and mongoDB.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=development node ./be/bin/www",
+    "serve": "cd fe && yarn serve",
+    "pr": "cd fe && yarn && yarn build && cd ../be && cross-env NODE_ENV=production PORT=80 node ./bin/www"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/homeless-leesky/Modern-web-development/issues"
   },
-  "homepage": "https://github.com/homeless-leesky/Modern-web-development#readme"
+  "homepage": "https://github.com/homeless-leesky/Modern-web-development#readme",
+  "dependencies": {
+    "cross-env": "^7.0.0"
+  }
 }

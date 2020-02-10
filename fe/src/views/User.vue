@@ -1,5 +1,6 @@
 <template>
   <v-container grid-list-md text-xs-center>
+    <!-- paallax 이거 패딩 줄여야함 : src/views/Home.vue 참고 -->
     <v-parallax
       class="mb-1"
       dark
@@ -151,9 +152,10 @@
         </v-card>
       </v-flex> -->
       <v-flex xs12 sm6 md4 lg3 xl2  v-for= 'user in users' :key="user._id">
+        <!-- event가 발생할때마다 페이지를 렌더링하니깐 이건 mounted 됐을떄 초기값으로 설정해야겠다.-->
         <v-card
           class="mx-auto"
-          :color= "ranColor()"
+          :color= "ranColor()" 
           dark
           max-width="400"
         >

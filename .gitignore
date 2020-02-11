@@ -106,3 +106,8 @@ dist
 
 # backend/yarn.lock
 ./be/yarn.lock
+
+
+# mongodb atlas cluster server url config
+
+config/

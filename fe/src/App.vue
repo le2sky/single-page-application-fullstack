@@ -26,10 +26,9 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    ;
     <v-app-bar
       :clipped-left="clipped"
-      color="indigo lighten-1"
+      color="primary"
       dense
       dark
       app
@@ -86,6 +85,13 @@ export default {
       drawer: true,
       fixed: false,
       items: [
+        {
+          icon: 'vpn_key',
+          title: '로그인',
+          to: {
+            path: '/sign'
+          }
+        },
         {
           icon: 'home',
           title: '홈',

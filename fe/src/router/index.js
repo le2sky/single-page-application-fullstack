@@ -19,6 +19,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/User.vue')
   },
   {
+    path: '/header',
+    name: 'header',
+    component: () => import('../views/Header.vue')
+
+  },
+  {
     path: '*',
     name: 'e404',
     component: () => import('../views/E404.vue')

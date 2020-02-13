@@ -3,6 +3,7 @@ var router = express.Router();
 var createError = require('http-errors')
 
 router.get('/', function(req, res, next) {
+  console.log(req.headers)
   res.send(
     {
       msg : 'it is okey'
@@ -10,13 +11,8 @@ router.get('/', function(req, res, next) {
   );
 });
 
-/* GET home page. */
-router.get('/test01', function(req, res, next) {
-  res.send(
-    {
-      msg : 'it is test api'
-    }
-  );
+router.get('/userAuth', function(req, res, next) {
+  res.send('what?');
 });
 
 router.all('*', function(req, res, next) {

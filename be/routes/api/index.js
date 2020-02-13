@@ -1,16 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var createError = require('http-errors')
-/* GET home page. */
-router.get('/hello', function(req, res, next) {
-  res.send(
-    {
-      a : 1,
-      msg : 'hello! it is my first api!'
-    }
-  );
-});
 
+router.all('*', (req,res,next) => {
+  //미들웨어 작성 부분
+  next();
+})
 
 router.use('/test', require('./test'));
 router.use('/user', require('./user'));

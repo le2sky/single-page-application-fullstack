@@ -99,6 +99,13 @@ export default {
           to: {
             path: '/user'
           }
+        },
+        {
+          icon: 'bubble_chart',
+          title: '헤더 테스트',
+          to: {
+            path: '/header'
+          }
         }
       ],
       miniVariant: false,

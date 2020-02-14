@@ -6,6 +6,8 @@
         <v-btn class="mr-2 mt-2" color="primary" @click="lsGet">로컬스토리지 출력</v-btn>
         <v-btn class="mr-2 mt-2" color="primary" @click="lsRemove">로컬스토리지 삭제</v-btn>
         <v-btn class="mr-2 mt-2" color="primary" @click="lsClear">로컬스토리지 전체삭제</v-btn>
+        <v-btn class="mr-2 mt-2" color="warning" @click="sendRealToken">토큰 인증 테스트</v-btn>
+        <v-btn class="mr-2 mt-2" color="warning" @click="sendFakeToken">가짜 토큰 인증 테스트</v-btn>
     </v-container>
 </template>
 
@@ -52,6 +54,23 @@ export default {
     },
     lsClear () {
       localStorage.clear()
+    },
+    sendRealToken () {
+      const token = localStorage.getItem('token')
+      axios.get(`${this.$apiRootPath}test`, { headers: { Authorization: token } })
+        .then((r) => {
+          console.log(r.data)
+        }).catch((e) => {
+          console.error(e.message)
+        })
+    },
+    sendFakeToken () {
+      axios.get(`${this.$apiRootPath}test`, { headers: { Authorization: 'dsohoih2hihui2ux' } })
+        .then((r) => {
+          console.log(r.data)
+        }).catch((e) => {
+          console.error(e.message)
+        })
     }
   }
 }

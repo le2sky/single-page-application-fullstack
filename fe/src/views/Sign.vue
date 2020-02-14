@@ -67,7 +67,9 @@ export default {
     signIn () {
       axios.post(`${this.$apiRootPath}sign/in`, this.form)
         .then((r) => {
-          console.log(r.data)
+          if (!r.data.success) return console.error(r.data.msg)
+          localStorage.setItem('token', r.data.token)
+          this.$router.push('/header')
         }).catch((e) => {
           console.error(e.message)
         })

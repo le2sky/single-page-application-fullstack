@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) { //read
 router.put('/:_id', (req, res, next) => { //update
   const _id = req.params._id
   Page.updateOne({_id},{
-    $set: { $set:req.body }
+    $set: req.body
   }).then((r) => {
     res.send({success : true, msg : r})
   }).catch((e) => {

@@ -1,14 +1,30 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
+import axios from 'axios'
 
 Vue.use(VueRouter)
-
+Vue.prototype.$axios = axios
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'lv0',
+    component: () => import('../views/Lv0.vue')
+  },
+  {
+    path: '/lv1',
+    name: 'lv1',
+    component: () => import('../views/Lv1.vue')
+  },
+  {
+    path: '/lv2',
+    name: 'lv2',
+    component: () => import('../views/Lv2.vue')
+  },
+  {
+    path: '/lv3',
+    name: 'lv3',
+    component: () => import('../views/Lv3.vue')
   },
   {
     path: '/user',
@@ -17,6 +33,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/User.vue')
+  },
+  {
+    path: '/page',
+    name: 'page',
+    component: () => import('../views/Page.vue')
   },
   {
     path: '/header',

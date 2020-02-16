@@ -9,6 +9,13 @@
       fixed
       app
     >
+     <v-img :aspect-ratio="16/9" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
+        <v-row align="end" class="lightbox white--text pa-2 fill-height">
+          <v-col>
+            <div class="subheading">temp님 반갑습니다!</div>
+          </v-col>
+        </v-row>
+      </v-img>
       <v-list>
         <v-list-item
           value="true"
@@ -92,10 +99,31 @@ export default {
       fixed: false,
       items: [
         {
-          icon: 'home',
-          title: '홈',
+          icon: 'smartphone',
+          title: 'Lv0 page',
           to: {
             path: '/'
+          }
+        },
+        {
+          icon: 'laptop_mac',
+          title: 'Lv1 page',
+          to: {
+            path: '/lv1'
+          }
+        },
+        {
+          icon: 'desktop_mac',
+          title: 'Lv2 page',
+          to: {
+            path: '/lv2'
+          }
+        },
+        {
+          icon: 'tablet_mac',
+          title: 'Lv3 page',
+          to: {
+            path: '/lv3'
           }
         },
         {
@@ -103,6 +131,13 @@ export default {
           title: '사용자관리',
           to: {
             path: '/user'
+          }
+        },
+        {
+          icon: 'domain',
+          title: '페이지관리',
+          to: {
+            path: '/page'
           }
         },
         {

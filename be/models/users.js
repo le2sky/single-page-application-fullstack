@@ -13,6 +13,8 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema);
 // User.collection.dropIndexes({name : 1})
 
+
+//admin 계정 초기 세팅
 User.findOne({id: cfg.admin.id}).then((r) => {
   if(!r) return User.create({id : cfg.admin.id, pwd: cfg.admin.pwd, name: cfg.admin.name})
   return Promise.resolve(null)

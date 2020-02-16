@@ -437,7 +437,8 @@ export default {
       })
     },
     getUsers () {
-      axios.get(`${this.$apiRootPath}user/`).then((r) => {
+      const token = localStorage.getItem('token')
+      axios.get(`${this.$apiRootPath}user/`, { headers: { Authorization: token } }).then((r) => {
         this.users = r.data.users
       }).catch((e) => {
         this.pop('user를 불러오는데 실패하였습니다.')

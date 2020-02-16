@@ -21,13 +21,22 @@ const routes = [
   {
     path: '/header',
     name: 'header',
-    component: () => import('../views/Header.vue')
-
+    component: () => import('../views/Header.vue'),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem('token')) return next('Block')
+      next()
+    }
   },
   {
     path: '/sign',
     name: 'sign',
     component: () => import('../views/Sign.vue')
+
+  },
+  {
+    path: '/Block',
+    name: 'block',
+    component: () => import('../views/Block.vue')
 
   },
   {

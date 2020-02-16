@@ -61,16 +61,22 @@
       fixed
     >
       <v-list>
-        <v-list-item @click="right = !right">
+        <v-list-item v-if="!$store.state.token" @click="$router.push('sign')">
           <v-list-item-action>
-            <v-icon>compare_arrows</v-icon>
+            <v-icon>vpn_key</v-icon>
           </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
+          <v-list-item-title>LOGIN</v-list-item-title>
+        </v-list-item>
+        <v-list-item v-else @click="signOut">
+          <v-list-item-action>
+            <v-icon>exit_to_app</v-icon>
+          </v-list-item-action>
+          <v-list-item-title>LOGOUT</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app >
-      <span>&copy; 2020@homeless-leesky</span>
+      <span>&copy; 2020@homeless-leesky {{$store.state.token}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -85,13 +91,6 @@ export default {
       drawer: true,
       fixed: false,
       items: [
-        {
-          icon: 'vpn_key',
-          title: '로그인',
-          to: {
-            path: '/sign'
-          }
-        },
         {
           icon: 'home',
           title: '홈',
@@ -118,6 +117,12 @@ export default {
       right: true,
       rightDrawer: false,
       title: 'homeless-leesy'
+    }
+  },
+  methods: {
+    signOut () {
+      this.$store.commit('delToken')
+      this.$router.push('/')
     }
   }
 }

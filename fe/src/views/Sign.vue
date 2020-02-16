@@ -69,7 +69,8 @@ export default {
         .then((r) => {
           if (!r.data.success) return console.error(r.data.msg)
           localStorage.setItem('token', r.data.token)
-          this.$router.push('/header')
+          this.$store.commit('getToken')
+          this.$router.push('/')
         }).catch((e) => {
           console.error(e.message)
         })

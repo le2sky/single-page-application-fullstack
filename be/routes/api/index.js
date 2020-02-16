@@ -17,6 +17,7 @@ const verifyToken = (t) => {
     })
   })
 }
+
 router.all('*', function(req, res, next) {
   // 토큰 검사
   const token = req.headers.authorization

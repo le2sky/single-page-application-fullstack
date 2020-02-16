@@ -10,7 +10,13 @@
 
 ```javascript
  module.exports = {
-     dbUrl: 'mongodb://localhost:27017/leesky' // input your dbserver url
+     dbUrl: 'mongodb://localhost:27017/leesky' // input your config
+     admin: {
+      id : 'input admin id',
+      pwd: 'input pwd',
+      name: 'input name'
+     },
+     secretKey: 'token verify key'
  }
 ```
 

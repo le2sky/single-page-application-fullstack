@@ -6,7 +6,6 @@ var logger = require('morgan');
 const history = require('connect-history-api-fallback');
 const cors = require('cors');
 const cfg = require('../config/inedx');
-const jwt = require('jsonwebtoken');
 var app = express();
 
 app.use(logger('dev'));

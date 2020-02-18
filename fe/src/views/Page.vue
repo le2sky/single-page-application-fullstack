@@ -16,14 +16,14 @@
     </v-row>
     </v-parallax>
 
-    <v-alert
-      :value="!pages.length"
-      type="warning"
-    >
-      데이터가 없습니다
-    </v-alert>
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 v-for="page in pages" :key="page._id">
+        <v-alert
+          :value="!pages.length"
+          type="warning"
+        >
+          데이터가 없습니다
+        </v-alert>
         <v-card>
           <v-card-title primary-title>
             <div>
@@ -117,6 +117,7 @@ export default {
     getPages () {
       this.$axios.get(`${this.$apiRootPath}manage/page`)
         .then((r) => {
+          console.log(r)
           this.pages = r.data.pages
         })
         .catch((e) => {

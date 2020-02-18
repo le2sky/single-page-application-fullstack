@@ -68,7 +68,7 @@
       fixed
     >
       <v-list>
-        <v-list-item v-if="!$store.state.token" @click="$router.push('sign')">
+        <v-list-item v-if="!$store.state.token" @click="$router.push('/sign')">
           <v-list-item-action>
             <v-icon>vpn_key</v-icon>
           </v-list-item-action>

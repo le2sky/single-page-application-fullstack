@@ -8,9 +8,9 @@ const User = require('../../../models/users')
 
 
 
-const signToken = (id, name) => {
+const signToken = (id, name, lv) => {
     return new Promise((resolve, reject) => {
-        jwt.sign({id, name}, cfg.secretKey , (err, token)=>{
+        jwt.sign({id, name, lv}, cfg.secretKey , (err, token)=>{
             if (err) reject(err)
             resolve(token)
         })
@@ -34,7 +34,7 @@ router.post('/in', (req,res,next) => {
     User.findOne({id}).then((r)=>{
         if(!r) throw new Error('존재하지 않는 아이디입니다.')
         if(r.pwd !== pwd) throw new Error('비밀번호가 틀립니다.')
-        return signToken(r.id, r.name)
+        return signToken(r.id, r.name, r.lv)
     }).then((r) => {
         res.send({success: true, token: r})
     }).catch((e) => {

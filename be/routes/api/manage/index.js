@@ -10,6 +10,7 @@ router.all('*', (req,res,next)=>{
 
 router.use('/user', require('./user'))
 router.use('/page', require('./page'))
+router.use('/site', require('./site'))
 
 router.all('/', (req, res, next) => {
     next(createError(404, 'there is no api in manage api'))

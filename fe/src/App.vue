@@ -52,7 +52,7 @@
         <v-icon>web</v-icon>
       </v-btn>
 
-      <v-toolbar-title v-text="title"></v-toolbar-title>
+      <v-toolbar-title v-text="siteTitle"></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>menu</v-icon>
@@ -83,7 +83,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer :fixed="fixed" app >
-      <span>&copy; 2020@homeless-leesky {{$store.state.token}}</span>
+      <span>{{siteCopyright}}</span>
     </v-footer>
   </v-app>
 </template>
@@ -92,11 +92,16 @@
 
 export default {
   name: 'App',
+  mounted () {
+    this.getSite()
+  },
   data () {
     return {
       clipped: false,
       drawer: true,
       fixed: false,
+      siteTitle: 'temp',
+      siteCopyright: '2020 leesky copyright ',
       items: [
         {
           icon: 'smartphone',
@@ -141,6 +146,13 @@ export default {
           }
         },
         {
+          icon: 'domain',
+          title: '사이트관리',
+          to: {
+            path: '/site'
+          }
+        },
+        {
           icon: 'bubble_chart',
           title: '헤더 테스트',
           to: {
@@ -150,11 +162,17 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'homeless-leesy'
+      rightDrawer: false
     }
   },
   methods: {
+    getSite () {
+      this.$axios.get('/site').then((r) => {
+        this.siteTitle = r.data.d.title
+        this.siteCopyright = r.data.d.copyright
+        this.$vuetify.theme.dark = r.data.d.dark
+      })
+    },
     signOut () {
       this.$store.commit('delToken')
       this.$router.push('/')

@@ -75,6 +75,12 @@ const routes = [
     beforeEnter: pageCheck
   },
   {
+    path: '/site',
+    name: 'site',
+    component: () => import('../views/Site.vue'),
+    beforeEnter: pageCheck
+  },
+  {
     path: '/header',
     name: 'header',
     component: () => import('../views/Header.vue')

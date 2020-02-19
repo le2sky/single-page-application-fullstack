@@ -8,6 +8,7 @@ const cfg = require('../../../config/inedx')
 //로그인을 할때는 토큰 검사가 필요없음.
 router.use('/sign', require('./sign'));
 
+router.use('/site', require('./site'));
 
 
 const verifyToken = (t) => {

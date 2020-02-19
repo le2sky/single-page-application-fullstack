@@ -8,12 +8,24 @@ Vue.prototype.$axios = axios
 const apiRootPath = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/api/' : '/api/'
 Vue.prototype.$apiRootPath = apiRootPath
 axios.defaults.baseURL = apiRootPath
-axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+// axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
+
+axios.interceptors.request.use(function (config) {
+  config.headers.Authorization = localStorage.getItem('token')
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
+axios.interceptors.response.use(function (response) {
+  return response
+}, function (error) {
+  return Promise.reject(error)
+})
+
 const pageCheck = (to, from, next) => {
   // return next()
   axios.post(`${apiRootPath}page`, { name: to.path.replace('/', '') }, { headers: { Authorization: localStorage.getItem('token') } })
     .then((r) => {
-      console.log(r)
       if (!r.data.success) throw new Error(r.data.msg)
       next()
     })

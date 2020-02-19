@@ -11,7 +11,7 @@ const Site = mongoose.model('Site', siteSchema)
 
 Site.findOne().then((r) => {
     if(!r) return Site.create({title: '등록 필요함'})
-    return Prommise.resolve(r)
+    return Promise.resolve(r)
 }).then((r) => {
     if(r) console.log(`${r.title} created`)
 }).catch((e)=>{

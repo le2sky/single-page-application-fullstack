@@ -10,9 +10,9 @@
       app
     >
      <v-img :aspect-ratio="16/9" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
-        <v-row align="end" class="lightbox white--text pa-2 fill-height">
+        <v-row align="end" class="lightbox white--text pl-2 fill-height">
           <v-col>
-            <div class="subheading">temp님 반갑습니다!</div>
+            <div class="subheading">SIDE MENU</div>
           </v-col>
         </v-row>
       </v-img>
@@ -68,12 +68,20 @@
       fixed
     >
       <v-list>
-        <v-list-item v-if="!$store.state.token" @click="$router.push('/sign')">
-          <v-list-item-action>
-            <v-icon>vpn_key</v-icon>
-          </v-list-item-action>
-          <v-list-item-title>LOGIN</v-list-item-title>
-        </v-list-item>
+        <template v-if="!$store.state.token">
+          <v-list-item @click="$router.push('/register')">
+            <v-list-item-action>
+              <v-icon>face</v-icon>
+            </v-list-item-action>
+            <v-list-item-title>회원가입</v-list-item-title>
+          </v-list-item>
+            <v-list-item @click="$router.push('/sign')">
+            <v-list-item-action>
+              <v-icon>vpn_key</v-icon>
+            </v-list-item-action>
+            <v-list-item-title>LOGIN</v-list-item-title>
+          </v-list-item>
+        </template>
         <v-list-item v-else @click="signOut">
           <v-list-item-action>
             <v-icon>exit_to_app</v-icon>
@@ -103,6 +111,13 @@ export default {
       siteTitle: 'temp',
       siteCopyright: '2020 leesky copyright ',
       items: [
+        {
+          icon: 'house',
+          title: 'HOME',
+          to: {
+            path: '/home'
+          }
+        },
         {
           icon: 'smartphone',
           title: 'Lv0 page',
@@ -175,7 +190,7 @@ export default {
     },
     signOut () {
       this.$store.commit('delToken')
-      this.$router.push('/')
+      this.$router.push('/sign')
     }
   }
 }

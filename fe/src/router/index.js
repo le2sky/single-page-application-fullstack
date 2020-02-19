@@ -36,6 +36,12 @@ const pageCheck = (to, from, next) => {
 
 const routes = [
   {
+    path: '/home',
+    name: 'home',
+    component: () => import('../views/Home.vue'),
+    beforeEnter: pageCheck
+  },
+  {
     path: '/',
     name: 'lv0',
     component: () => import('../views/Lv0.vue'),
@@ -89,7 +95,11 @@ const routes = [
     path: '/sign',
     name: 'sign',
     component: () => import('../views/Sign.vue')
-
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('../views/Register.vue')
   },
   {
     path: '/block/:msg',

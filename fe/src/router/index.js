@@ -7,15 +7,13 @@ Vue.use(VueRouter)
 Vue.prototype.$axios = axios
 const apiRootPath = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/api/' : '/api/'
 Vue.prototype.$apiRootPath = apiRootPath
+axios.defaults.baseURL = apiRootPath
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
 const pageCheck = (to, from, next) => {
   // return next()
-  // let token = localStorage.getItem('token')
-  // if (typeof token !== 'string') {
-  //   token = 'tempt'
-  // } --> token이 없으면 null이 나올텐데, null은 오브젝트야 근데 오브젝트를 파싱안하고 보내면 [Object]object가 찍히니깐
-  //  조심해 줘야함
   axios.post(`${apiRootPath}page`, { name: to.path.replace('/', '') }, { headers: { Authorization: localStorage.getItem('token') } })
     .then((r) => {
+      console.log(r)
       if (!r.data.success) throw new Error(r.data.msg)
       next()
     })
@@ -55,12 +53,14 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/User.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/User.vue'),
+    beforeEnter: pageCheck
   },
   {
     path: '/page',
     name: 'page',
-    component: () => import('../views/Page.vue')
+    component: () => import('../views/Page.vue'),
+    beforeEnter: pageCheck
   },
   {
     path: '/header',

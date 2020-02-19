@@ -8,8 +8,6 @@ const cfg = require('../../../config/inedx')
 //로그인을 할때는 토큰 검사가 필요없음.
 router.use('/sign', require('./sign'));
 
-//test
-router.use('/manage', require('./manage'));
 
 
 const verifyToken = (t) => {
@@ -40,12 +38,11 @@ router.all('*', function(req, res, next) {
 
 router.use('/test', require('./test'));
 router.use('/page', require('./page'));
+router.use('/manage', require('./manage'));
 
-router.all('*', function(req, res, next) {
-  if(req.user.lv > 2) return res.send({
-    success: false, msg: '권한이 없습니다.'
-  })
-  next()
-});
+
+router.all('/', (req, res, next) => {
+  next(createError(404, 'there is no api'))
+})
 
 module.exports = router;

@@ -20,7 +20,7 @@ const User = mongoose.model('User', userSchema);
 
 //admin 계정 초기 세팅
 User.findOne({id: cfg.admin.id}).then((r) => {
-  if(!r) return User.create({id : cfg.admin.id, pwd: cfg.admin.pwd, name: cfg.admin.name})
+  if(!r) return User.create({id : cfg.admin.id, pwd: cfg.admin.pwd, name: cfg.admin.name, lv: 0})
   if(r.lv === undefined) return User.updateOne({_id: r.id}, {
     $set: {
       lv: 0,
@@ -33,5 +33,22 @@ User.findOne({id: cfg.admin.id}).then((r) => {
 }).catch((e) => {
   console.error(e.message)
 })
+
+User.findOne({id: 'lv2'}).then((r) => {
+  if(!r) return User.create({id : 'lv2', pwd: '1234', name: 'lv2', lv: 2})
+  if(r.lv === undefined) return User.updateOne({_id: r.id}, {
+    $set: {
+      lv: 0,
+      inCnt: 0
+    }
+  })
+  return Promise.resolve(null)
+}).then((r) => {
+  if(r) console.log(`sample: ${r.id} created!`)
+}).catch((e) => {
+  console.error(e.message)
+})
+
+
 
 module.exports = User;

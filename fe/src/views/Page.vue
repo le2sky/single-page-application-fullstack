@@ -115,9 +115,8 @@ export default {
   },
   methods: {
     getPages () {
-      this.$axios.get(`${this.$apiRootPath}manage/page`)
+      this.$axios.get(`${this.$apiRootPath}manage/page/`)
         .then((r) => {
-          console.log(r)
           this.pages = r.data.pages
         })
         .catch((e) => {

@@ -7,8 +7,7 @@ const cfg = require('../../../config/inedx')
 
 //로그인을 할때는 토큰 검사가 필요없음.
 router.use('/sign', require('./sign'));
-
-router.use('/site', require('./site'));
+router.use('/register', require('./register'))
 
 
 const verifyToken = (t) => {
@@ -40,7 +39,7 @@ router.all('*', function(req, res, next) {
 router.use('/test', require('./test'));
 router.use('/page', require('./page'));
 router.use('/manage', require('./manage'));
-
+router.use('/site', require('./site'));
 
 router.all('/', (req, res, next) => {
   next(createError(404, 'there is no api'))

@@ -13,7 +13,7 @@ Site.findOne().then((r) => {
     if(!r) return Site.create({title: '등록 필요함'})
     return Promise.resolve(r)
 }).then((r) => {
-    if(r) console.log(`${r.title} created`)
+    if(r) console.log(`[notice] web application ${r.title}이 시작되었습니다.`)
 }).catch((e)=>{
     console.error(e.message)
 })

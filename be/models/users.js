@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const cfg = require('../../config/inedx')
-
+const crypto = require('crypto')
 mongoose.set('useCreateIndex', true)
 const userSchema = new mongoose.Schema({
   name: {type: String, default: '', index: true},
@@ -28,27 +28,17 @@ User.findOne({id: cfg.admin.id}).then((r) => {
     }
   })
   return Promise.resolve(null)
+}).then((r) =>{
+  if(!r) return Promise.resolve(null)
+  if(r.pwd !== cfg.admin.pwd) return Promise.resolve(null)
+  console.log(`admin: ${r.id} created`)
+  const pwd = crypto.scryptSync(r.pwd, r._id.toString(), 64, { N : 1024}).toString('hex')
+  return User.updateOne({_id: r._id},{$set: {pwd}})
 }).then((r) => {
-  if(r) console.log(`admin: ${r.id} created!`)
+  if(r) console.log('admin: pwd changed')
 }).catch((e) => {
   console.error(e.message)
 })
-
-User.findOne({id: 'lv2'}).then((r) => {
-  if(!r) return User.create({id : 'lv2', pwd: '1234', name: 'lv2', lv: 2})
-  if(r.lv === undefined) return User.updateOne({_id: r.id}, {
-    $set: {
-      lv: 0,
-      inCnt: 0
-    }
-  })
-  return Promise.resolve(null)
-}).then((r) => {
-  if(r) console.log(`sample: ${r.id} created!`)
-}).catch((e) => {
-  console.error(e.message)
-})
-
 
 
 module.exports = User;

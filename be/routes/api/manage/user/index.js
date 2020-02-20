@@ -21,7 +21,7 @@ const User = require('../../../../models/users')
 
 
 router.get('/', function(req, res, next) { //read
-  User.find().then((r) => {
+  User.find().select('-pwd').then((r) => {
     res.send( { users: r, success : true});
   }).catch((e) =>{ 
     res.send({ success : false});

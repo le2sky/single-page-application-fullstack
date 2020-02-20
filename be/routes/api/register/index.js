@@ -2,7 +2,7 @@ var express = require('express')
 var createError = require('http-errors')
 var router = express.Router();
 var User = require('../../../models/users')
-
+var crypto = require('crypto')
 router.post('/', (req,res) => {
     const u = req.body
     if (!u.id) return res.send({ success: false, msg: '아이디를 입력해주세요!'})
@@ -12,6 +12,9 @@ router.post('/', (req,res) => {
     User.findOne({id: u.id}).then((r) => {
         if(r) throw new Error('이미 등록되어 있는 아이디입니다.')
         return User.create(u)
+    }).then((r)=>{
+        const pwd = crypto.scryptSync(r.pwd, r._id.toString(), 64, { N: 1024 }).toString('hex')
+        return User.updateOne({_id: r._id}, { $set: { pwd }})
     }).then((r) => {
         res.send({success: true})
     }).catch((e) => {

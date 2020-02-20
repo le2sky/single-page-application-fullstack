@@ -30,6 +30,8 @@
               <div>권한: {{user.lv}}</div>
               <div>나이: {{user.age}}</div>
               <div>로그인 횟수: {{user.inCnt}}</div>
+              <div>계정 아이디: {{user.id}}</div>
+              <div>salt(_id): {{user._id}}</div>
             </div>
           </v-card-title>
           <v-divider light></v-divider>

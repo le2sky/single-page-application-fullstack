@@ -98,3 +98,12 @@ mongoose.connect(cfg.dbUrl, {useNewUrlParser : true, useUnifiedTopology: true},(
   // })
 })
 console.log(`[NOTICE] ${process.env.NODE_ENV} 모드로 서버가 실행되었습니다.`)
+
+
+// const crypto = require('crypto');
+// // Using the factory defaults.
+// const key1 = crypto.scryptSync('secret', 'salt', 64);
+// console.log(key1.toString('hex'));  // '3745e48...08d59ae'
+// // Using a custom N parameter. Must be a power of two.
+// const key2 = crypto.scryptSync('secret', 'salt', 64, { N: 1024 });
+// console.log(key2.toString('hex'));  // '3745e48...aa39b34'

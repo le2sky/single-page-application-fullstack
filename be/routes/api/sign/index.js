@@ -5,7 +5,7 @@ var router = express.Router();
 const jwt = require('jsonwebtoken')
 const cfg = require('../../../../config/inedx')
 const User = require('../../../models/users')
-
+const crypto = require('crypto')
 
 
 const signToken = (id, name, lv) => {
@@ -33,7 +33,9 @@ router.post('/in', (req,res,next) => {
 
     User.findOne({id}).then((r)=>{
         if(!r) throw new Error('존재하지 않는 아이디입니다.')
-        if(r.pwd !== pwd) throw new Error('비밀번호가 틀립니다.')
+       // if(r.pwd !== pwd) throw new Error('비밀번호가 틀립니다.')
+        const p = crypto.scryptSync(pwd, r._id.toString(), 64, {N:1024}).toString('hex')
+        if(r.pwd !== p) throw new Error('비밀번호가 틀립니다.') 
         return signToken(r.id, r.name, r.lv)
     }).then((r) => {
         res.send({success: true, token: r})

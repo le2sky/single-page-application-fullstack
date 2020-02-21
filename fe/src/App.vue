@@ -147,6 +147,13 @@ export default {
           }
         },
         {
+          icon: 'settings',
+          title: '게시판관리',
+          to: {
+            path: '/manage/boards'
+          }
+        },
+        {
           icon: 'supervisor_account',
           title: '사용자관리',
           to: {

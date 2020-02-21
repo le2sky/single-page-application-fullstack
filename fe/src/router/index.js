@@ -108,6 +108,12 @@ const routes = [
     name: 'block',
     component: () => import('../views/Block.vue')
   },
+  {
+    path: '/manage/boards',
+    name: 'manageBoards',
+    component: () => import('../views/manage/Boards.vue'),
+    beforeEnter: pageCheck
+  },
   // {
   //   path: '/userCtest',
   //   name: 'userCtest',

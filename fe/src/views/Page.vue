@@ -39,8 +39,8 @@
           </v-card-title>
           <v-divider light></v-divider>
           <v-card-actions>
-            <v-btn dark color="orange" @click="putDialog(page)">수정</v-btn>
-            <v-btn dark color="error" @click="delPage(page._id)">삭제</v-btn>
+            <v-btn text dark color="orange" @click="putDialog(page)">수정</v-btn>
+            <v-btn text dark color="error" @click="delPage(page._id)">삭제</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -75,8 +75,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" flat @click="putPage">수정</v-btn>
-          <v-btn color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
+          <v-btn text color="blue darken-1" flat @click="putPage">수정</v-btn>
+          <v-btn text color="blue darken-1" flat @click.native="dialog = false">Close</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

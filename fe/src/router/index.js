@@ -106,6 +106,11 @@ const routes = [
     name: 'block',
     component: () => import('../views/Block.vue')
   },
+  // {
+  //   path: '/userCtest',
+  //   name: 'userCtest',
+  //   component: () => import('../views/userCtest.vue')
+  // },
   {
     path: '*',
     name: 'e404',

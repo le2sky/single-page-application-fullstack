@@ -20,11 +20,11 @@
         <v-card>
           <v-card-title primary-title>
             <div>
-              <h3 class="headline mb-0">{{user.id}}</h3>
+              <h4 class="headline mb-0">{{user.id}}</h4>
             </div>
           </v-card-title>
           <v-divider light></v-divider>
-          <v-card-title primary-title>
+          <v-card-text>
             <div>
               <div>이름: {{user.name}}</div>
               <div>권한: {{user.lv}}</div>
@@ -33,11 +33,11 @@
               <div>계정 아이디: {{user.id}}</div>
               <div>salt(_id): {{user._id}}</div>
             </div>
-          </v-card-title>
+          </v-card-text>
           <v-divider light></v-divider>
           <v-card-actions>
-            <v-btn  dark color="orange" @click="putDialog(user)">수정</v-btn>
-            <v-btn  dark color="error" @click="delDia(user._id)">삭제</v-btn>
+            <v-btn text  dark color="orange" @click="putDialog(user)">수정</v-btn>
+            <v-btn text dark color="error" @click="delDia(user._id)">삭제</v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>

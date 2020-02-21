@@ -30,14 +30,17 @@
                     label="Login"
                     prepend-icon="person"
                     type="text"
-                  />
-
+                  ></v-text-field>
                   <v-text-field
                     v-model="form.pwd"
                     label="Password"
                     prepend-icon="lock"
                     type="password"
-                  />
+                  ></v-text-field>
+                  <v-checkbox
+                    v-model="form.remember"
+                    label="Stay Signed in (최대 7일)"
+                  ></v-checkbox>
                 </v-form>
               </v-card-text>
               <v-card-actions>
@@ -59,7 +62,8 @@ export default {
     return {
       form: {
         id: '',
-        pwd: ''
+        pwd: '',
+        remember: false
       }
     }
   },

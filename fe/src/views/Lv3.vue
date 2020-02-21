@@ -5,3 +5,12 @@
     </v-alert>
   </v-container>
 </template>
+
+<script>
+
+export default {
+  mounted () {
+  }
+}
+
+</script>

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const history = require('connect-history-api-fallback');
 const cors = require('cors');
-const cfg = require('../config/inedx');
+const cfg = require('../config/index');
 var app = express();
 
 app.use(logger('dev'));

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const cfg = require('../../config/inedx')
+const cfg = require('../../config/index')
 const crypto = require('crypto')
 mongoose.set('useCreateIndex', true)
 const userSchema = new mongoose.Schema({

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const cfg = require('../../config/inedx')
 
 mongoose.set('useCreateIndex', true)
 const pageSchema = new mongoose.Schema({

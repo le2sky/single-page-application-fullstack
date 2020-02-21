@@ -22,7 +22,7 @@ const User = require('../../../../models/users')
 
 router.get('/', function(req, res, next) { //read
   User.find().select('-pwd').then((r) => {
-    res.send( { users: r, success : true});
+    res.send( { users: r, success : true, token: req.token});
   }).catch((e) =>{ 
     res.send({ success : false});
   })
@@ -36,7 +36,7 @@ router.put('/:_id', (req, res, next) => { //update
   User.updateOne({_id},{
     $set: req.body
   }).then((r) => {
-    res.send({success : true, msg : r})
+    res.send({success : true, msg : r, token: req.token})
   }).catch((e) => {
     res.send({success : false, msg : e.message})
   })
@@ -46,7 +46,7 @@ router.put('/:_id', (req, res, next) => { //update
 router.delete('/:_id', (req, res, next) => { //delete
   const _id = req.params._id
   User.deleteOne({_id}).then((r) => {
-    res.send({success : true, msg : r})
+    res.send({success : true, msg : r, token: req.token})
   }).catch((e) => {
     res.send({success : false, msg : e.message})
   })

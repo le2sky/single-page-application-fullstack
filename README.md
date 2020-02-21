@@ -1,10 +1,10 @@
-# Modern-web-development
+# Modern-web-development✨
  Develop a modern web using express for Node.js, Vue.js, and mongoDB.
 <hr>
 
 <img src="./structure.JPG" />
 
-## config file setting.
+## config file setting🐱‍🏍
 
 **config/index.js**  
 
@@ -28,4 +28,17 @@
 }
 ```
 
-## run
+## run🐱‍🐉
+
+### for development💫 
+` $ npm run dev ` --> backend api server start <br>
+` $ npm run serve` --> front development server start
+
+<hr>
+
+### for production🐱‍👓
+
+` $ npm run pr `
+
+
+

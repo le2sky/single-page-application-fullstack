@@ -99,11 +99,18 @@ mongoose.connect(cfg.dbUrl, {useNewUrlParser : true, useUnifiedTopology: true},(
 })
 console.log(`[NOTICE] ${process.env.NODE_ENV} 모드로 서버가 실행되었습니다.`)
 
+// const User =require('./models/users')
+// const Board = require('./models/boards')
+// const Article = require('./models/articles')
 
-// const crypto = require('crypto');
-// // Using the factory defaults.
-// const key1 = crypto.scryptSync('secret', 'salt', 64);
-// console.log(key1.toString('hex'));  // '3745e48...08d59ae'
-// // Using a custom N parameter. Must be a power of two.
-// const key2 = crypto.scryptSync('secret', 'salt', 64, { N: 1024 });
-// console.log(key2.toString('hex'));  // '3745e48...aa39b34'
+// // Article.create({ title: 'aaa', content: 'kkkk', _user: '5e4e70b4e37e7491f473fd52', _board: '5e4fca35ad319f4ffced6ed0'})
+// // .then((r) => {
+// //   console.log(r)
+// // })
+// // Article.deleteMany({ title:'aaa'}).then((r) => {
+// //   console.log (r)
+// // })
+
+// Article.findOne().populate('_user','name').populate('_board').then((r) => {
+//   console.log(r)
+// })

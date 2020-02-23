@@ -9,28 +9,55 @@
       fixed
       app
     >
-     <v-img :aspect-ratio="16/9" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60">
-        <v-row align="end" class="lightbox white--text pl-2 fill-height">
-          <v-col>
-            <div class="subheading">SIDE MENU</div>
-          </v-col>
-        </v-row>
-      </v-img>
+      <v-list>
+        <v-list-item>
+          <v-list-item-avatar>
+            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+          </v-list-item-avatar>
+        </v-list-item>
+        <v-list-item link>
+          <v-list-item-content>
+            <v-list-item-title class="title">leesky</v-list-item-title>
+            <v-list-item-subtitle>hee1149kr@naver.com</v-list-item-subtitle>
+          </v-list-item-content>
+          <v-list-item-action>
+            <v-icon>mdi-menu-down</v-icon>
+          </v-list-item-action>
+        </v-list-item>
+      </v-list>
+      <v-divider></v-divider>
       <v-list>
         <v-list-item
-          value="true"
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          color=primary
-        >
-          <v-list-item-action>
-          <v-icon v-html="item.icon"></v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title"></v-list-item-title>
-          </v-list-item-content>
+            :to="home.to"
+          >
+            <v-list-item-icon><v-icon v-text="home.action"></v-icon></v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="home.group_title"></v-list-item-title>
+            </v-list-item-content>
         </v-list-item>
+        <v-list-group
+          v-for="item in items"
+          :key="item.group_title"
+          v-model="item.active"
+          :prepend-icon="item.action"
+          no-action
+        >
+          <template v-slot:activator>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.group_title"></v-list-item-title>
+            </v-list-item-content>
+          </template>
+          <v-list-item
+            v-for="subItem in item.subItems"
+            :key="subItem.title"
+            :to="subItem.to"
+          >
+            <v-list-item-icon><v-icon v-text="subItem.icon"></v-icon></v-list-item-icon>
+            <v-list-item-content>
+              <v-list-item-title v-text="subItem.title"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-group>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar
@@ -44,12 +71,6 @@
 
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon v-html="miniVariant ? 'chevron_right' : 'chevron_left'"></v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>web</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>web</v-icon>
       </v-btn>
 
       <v-toolbar-title v-text="siteTitle"></v-toolbar-title>
@@ -110,76 +131,82 @@ export default {
       fixed: false,
       siteTitle: 'temp',
       siteCopyright: '2020 leesky copyright ',
+      home: {
+        action: 'house',
+        group_title: 'HOME',
+        to: {
+          path: '/'
+        }
+      },
       items: [
         {
-          icon: 'house',
-          title: 'HOME',
-          to: {
-            path: '/home'
-          }
+          action: 'bubble_chart',
+          group_title: '권한 테스트',
+          active: true,
+          subItems: [
+            {
+              icon: 'smartphone',
+              title: 'Lv0 page',
+              to: {
+                path: '/lv0'
+              }
+            },
+            {
+              icon: 'laptop_mac',
+              title: 'Lv1 page',
+              to: {
+                path: '/lv1'
+              }
+            },
+            {
+              icon: 'desktop_mac',
+              title: 'Lv2 page',
+              to: {
+                path: '/lv2'
+              }
+            },
+            {
+              icon: 'tablet_mac',
+              title: 'Lv3 page',
+              to: {
+                path: '/lv3'
+              }
+            }
+          ]
         },
         {
-          icon: 'smartphone',
-          title: 'Lv0 page',
-          to: {
-            path: '/'
-          }
-        },
-        {
-          icon: 'laptop_mac',
-          title: 'Lv1 page',
-          to: {
-            path: '/lv1'
-          }
-        },
-        {
-          icon: 'desktop_mac',
-          title: 'Lv2 page',
-          to: {
-            path: '/lv2'
-          }
-        },
-        {
-          icon: 'tablet_mac',
-          title: 'Lv3 page',
-          to: {
-            path: '/lv3'
-          }
-        },
-        {
-          icon: 'settings',
-          title: '게시판관리',
-          to: {
-            path: '/manage/boards'
-          }
-        },
-        {
-          icon: 'supervisor_account',
-          title: '사용자관리',
-          to: {
-            path: '/user'
-          }
-        },
-        {
-          icon: 'domain',
-          title: '페이지관리',
-          to: {
-            path: '/page'
-          }
-        },
-        {
-          icon: 'domain',
-          title: '사이트관리',
-          to: {
-            path: '/site'
-          }
-        },
-        {
-          icon: 'bubble_chart',
-          title: '헤더 테스트',
-          to: {
-            path: '/header'
-          }
+          action: 'settings',
+          group_title: '관리',
+          subItems: [
+            {
+              icon: 'settings',
+              title: '게시판관리',
+              to: {
+                path: '/boards'
+              }
+            },
+            {
+              icon: 'supervisor_account',
+              title: '사용자관리',
+              to: {
+                path: '/user'
+              }
+            },
+            {
+              icon: 'domain',
+              title: '페이지관리',
+              to: {
+                path: '/page'
+              }
+            },
+            {
+              icon: 'domain',
+              title: '사이트관리',
+              to: {
+                path: '/site'
+              }
+            }
+          ]
         }
       ],
       miniVariant: false,

@@ -38,33 +38,33 @@ const pageCheck = (to, from, next) => {
 
 const routes = [
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: () => import('../views/Home.vue'),
     beforeEnter: pageCheck
   },
   {
-    path: '/',
+    path: '/lv0',
     name: 'lv0',
-    component: () => import('../views/Lv0.vue'),
+    component: () => import('../views/test/Lv0.vue'),
     beforeEnter: pageCheck
   },
   {
     path: '/lv1',
     name: 'lv1',
-    component: () => import('../views/Lv1.vue'),
+    component: () => import('../views/test/Lv1.vue'),
     beforeEnter: pageCheck
   },
   {
     path: '/lv2',
     name: 'lv2',
-    component: () => import('../views/Lv2.vue'),
+    component: () => import('../views/test/Lv2.vue'),
     beforeEnter: pageCheck
   },
   {
     path: '/lv3',
     name: 'lv3',
-    component: () => import('../views/Lv3.vue'),
+    component: () => import('../views/test/Lv3.vue'),
     beforeEnter: pageCheck
   },
   {
@@ -73,26 +73,32 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/User.vue'),
+    component: () => import(/* webpackChunkName: "about" */ '../views/manage/User.vue'),
     beforeEnter: pageCheck
   },
   {
     path: '/page',
     name: 'page',
-    component: () => import('../views/Page.vue'),
+    component: () => import('../views/manage/Page.vue'),
     beforeEnter: pageCheck
   },
   {
     path: '/site',
     name: 'site',
-    component: () => import('../views/Site.vue'),
+    component: () => import('../views/manage/Site.vue'),
     beforeEnter: pageCheck
   },
   {
-    path: '/header',
-    name: 'header',
-    component: () => import('../views/Header.vue')
+    path: '/boards',
+    name: 'manageBoards',
+    component: () => import('../views/manage/Boards.vue'),
+    beforeEnter: pageCheck
   },
+  // {
+  //   path: '/header',
+  //   name: 'header',
+  //   component: () => import('../views/Header.vue')
+  // },
   {
     path: '/sign',
     name: 'sign',
@@ -109,10 +115,9 @@ const routes = [
     component: () => import('../views/Block.vue')
   },
   {
-    path: '/manage/boards',
-    name: 'manageBoards',
-    component: () => import('../views/manage/Boards.vue'),
-    beforeEnter: pageCheck
+    path: '/block/manage',
+    name: 'block',
+    component: () => import('../views/Block.vue')
   },
   // {
   //   path: '/userCtest',

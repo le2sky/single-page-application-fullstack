@@ -52,7 +52,6 @@
             :key="subItem.title"
             :to="subItem.to"
           >
-            <v-list-item-icon><v-icon v-text="subItem.icon"></v-icon></v-list-item-icon>
             <v-list-item-content>
               <v-list-item-title v-text="subItem.title"></v-list-item-title>
             </v-list-item-content>
@@ -140,33 +139,41 @@ export default {
       },
       items: [
         {
-          action: 'bubble_chart',
-          group_title: '권한 테스트',
-          active: true,
+          action: 'chat',
+          group_title: '게시판',
           subItems: [
             {
-              icon: 'smartphone',
+              icon: 'home',
+              title: '전부',
+              to: {
+                path: '/anyone'
+              }
+            }
+          ]
+        },
+        {
+          action: 'pan_tool',
+          group_title: '권한 테스트',
+          subItems: [
+            {
               title: 'Lv0 page',
               to: {
                 path: '/lv0'
               }
             },
             {
-              icon: 'laptop_mac',
               title: 'Lv1 page',
               to: {
                 path: '/lv1'
               }
             },
             {
-              icon: 'desktop_mac',
               title: 'Lv2 page',
               to: {
                 path: '/lv2'
               }
             },
             {
-              icon: 'tablet_mac',
               title: 'Lv3 page',
               to: {
                 path: '/lv3'
@@ -179,28 +186,24 @@ export default {
           group_title: '관리',
           subItems: [
             {
-              icon: 'settings',
               title: '게시판관리',
               to: {
                 path: '/boards'
               }
             },
             {
-              icon: 'supervisor_account',
               title: '사용자관리',
               to: {
                 path: '/user'
               }
             },
             {
-              icon: 'domain',
               title: '페이지관리',
               to: {
                 path: '/page'
               }
             },
             {
-              icon: 'domain',
               title: '사이트관리',
               to: {
                 path: '/site'

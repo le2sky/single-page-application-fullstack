@@ -10,16 +10,16 @@ router.use('/sign', require('./sign'));
 router.use('/register', require('./register'))
 
 
-const signToken = (id, lv, name, rmb) => {
+const signToken = (_id, id, lv, name, exp) => {
   return new Promise((resolve, reject) => {
     const o = {
       issuer: cfg.jwt.issuer,
       subject: cfg.jwt.subject,
-      expiresIn: cfg.jwt.expiresIn, // 3분
+      expiresIn: exp,
       algorithm: cfg.jwt.algorithm
     }
-    if (rmb) o.expiresIn = cfg.jwt.expiresInRemember // 7일
-    jwt.sign({ id, lv, name, rmb }, cfg.jwt.secretKey, o, (err, token) => {
+    //if (rmb) o.expiresIn = cfg.jwt.expiresInRemember // 7일
+    jwt.sign({_id, id, lv, name}, cfg.jwt.secretKey, o, (err, token) => {
       if (err) reject(err)
       resolve(token)
     })
@@ -32,9 +32,10 @@ const getToken = async(t) => {
   const diff = moment(vt.exp * 1000).diff(moment(), 'seconds')
   // return vt
   console.log(diff)
-  if (diff > (vt.exp - vt.iat) / cfg.jwt.expiresInDiv) return { user: vt, token: null }
+  const expSec = (vt.exp - vt.iat)
+  if (diff > expSec / cfg.jwt.expiresInDiv) return { user: vt, token: null }
 
-  const nt = await signToken(vt.id, vt.lv, vt.name, vt.rmb)
+  const nt = await signToken(vt._id, vt.id, vt.lv, vt.name, expSec)
   vt = await verifyToken(nt)
   return { user: vt, token: nt }
 }
@@ -68,6 +69,8 @@ router.use('/test', require('./test'));
 router.use('/page', require('./page'));
 router.use('/manage', require('./manage'));
 router.use('/site', require('./site'));
+router.use('/board', require('./board'));
+router.use('/article', require('./article'));
 
 router.all('/', (req, res, next) => {
   next(createError(404, 'there is no api'))

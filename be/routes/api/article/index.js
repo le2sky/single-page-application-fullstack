@@ -32,22 +32,34 @@ router.post('/:_board', (req, res, next) => {
     })
 })
 
-router.get('/:_board', (req, res, next) => {
+router.get('/list/:_board', (req, res, next) => {
     const _board = req.params._board
-    Article.find( { _board } ).populate('_user', '-pwd').then((rs) => {
+    Article.find( { _board } ).select('-content').populate('_user', '-pwd').then((rs) => {
         res.send( { success: true, ds: rs, token : req.token })
     }).catch((e) => {
         res.send({ success: false, msg: e.message })
     })
 })
 
+router.get('/read/:_id', (req, res, next) => {
+    const _id = req.params._id
+    Article.findById(_id).select('content').then((r) => {
+        res.send( { success: true, d: r, token : req.token })
+    }).catch((e) => {
+        res.send({ success: false, msg: e.message })
+    })
+})
+
+
+
 router.put('/:_id', (req, res, next)=>{
     if (!req.user._id) return res.send({success: false, msg: '손님은 수정 권한이 없습니다.'})
     const _id = req.params._id
-
     Article.findById(_id).then((r) => {
         if(!r) throw Error('게시물 없음')
-        if(r._user.toString() !== req.user._id ) throw Error('다른 사람의 게시글을 수정할 수 없습니다.')
+        if(r._user){ //r._user 이 손님일 경우 null
+            if(r._user.toString() !== req.user._id ) throw Error('다른 사람의 게시글을 수정할 수 없습니다.')
+        }
         return Article.findOneAndUpdate({ _id }, { $set : req.body }, {new : true})
     }).then((r) => {
         res.send({ success: true, d: r, token: req.token})
@@ -59,7 +71,6 @@ router.put('/:_id', (req, res, next)=>{
 router.delete('/:_id', (req, res, next) => {
     if (!req.user._id) return res.send({success: false, msg: '손님은 수정 권한이 없습니다.'})
     const _id = req.params._id
-    
     Article.findById(_id).populate('_user', 'lv' ).then((r) => {
         if(!r) throw Error('게시물 없음')
         if(r._user) {

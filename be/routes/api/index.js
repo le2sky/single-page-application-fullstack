@@ -55,7 +55,7 @@ const verifyToken = (t) => {
 router.all('*', function(req, res, next) {
   // 토큰 검사
   getToken(req.headers.authorization).then((v) => {
-    console.log(v)
+    //console.log(v)
     req.user = v.user
     req.token = v.token
     next()

@@ -34,11 +34,36 @@ router.post('/:_board', (req, res, next) => {
 
 router.get('/list/:_board', (req, res, next) => {
     const _board = req.params._board
-    Article.find( { _board } ).select('-content').populate('_user', '-pwd').then((rs) => {
-        res.send( { success: true, ds: rs, token : req.token })
-    }).catch((e) => {
-        res.send({ success: false, msg: e.message })
-    })
+    let { search, sort, order, skip, limit } = req.query
+    if (!(sort && order && skip && limit)) return res.send({ success: false, msg: '잘못된 요청입니다.'})
+    if (!search) search=''
+    order = parseInt(order)
+    limit = parseInt(limit)
+    skip = parseInt(skip)
+    const s = {}
+    s[sort] = order
+    // ex) s.title = -1 제목으로 내림차순 정렬해!
+
+    const f = {}
+    if (_board) f._board = _board
+    let total = 0 //total data initial setting
+
+    Article.countDocuments(f) //데이터 수 반환
+        .where('title').regex(search)
+        .then((r) => {
+            total = r
+            return Article.find(f)
+                .where('title').regex(search)
+                .sort(s)
+                .skip(skip)
+                .limit(limit)
+                .select('-content')
+                .populate('_user', '-pwd')
+        }).then((rs) => {
+            res.send( { success : true, t: total, ds :rs , token: req.token })
+        }).catch((e) => {
+            res.send( { success: false, msg: e.message })
+        })
 })
 
 router.get('/read/:_id', (req, res, next) => {

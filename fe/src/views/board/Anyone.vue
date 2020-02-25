@@ -26,14 +26,29 @@
           {{article}}
       </v-flex>
       -->
+      <v-flex xs12 sm4 offset-sm8>
+        <v-text-field
+          label="검색"
+          append-icon="search"
+          v-model="params.search"
+          clearable
+        ></v-text-field>
+      </v-flex>
       <v-flex xs12>
         <v-data-table
+          :page.sync="pagination.page"
           :headers="headers"
+          :items-per-page.sync="pagination.itemsPerPage"
           :items="articles"
           class="elevation-1"
+          :sortBy.sync="pagination.sortBy"
+          :sortDesc.sync="pagination.sortDesc"
           @click:row="read"
         >
         </v-data-table>
+        <div class="text-xs-center pt-2">
+          <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+        </div>
       </v-flex>
     </v-layout>
     <v-btn
@@ -190,7 +205,53 @@ export default {
         title: '',
         content: ''
       },
-      bindTempforAtc: ''
+      bindTempforAtc: '',
+      // 페이징
+      pagination: {
+        page: 1,
+        itemsPerPage: 5,
+        totalItems: 0
+      },
+      params: {
+        draw: 0,
+        search: '',
+        skip: 0,
+        sort: '_id',
+        order: 0,
+        limit: 1
+      },
+      timeout: null
+    }
+  },
+  watch: {
+    pagination: {
+      handler () {
+        this.list()
+      },
+      deep: true
+    },
+    'params.search': {
+      handler () {
+        this.delay()
+      }
+    }
+  },
+  computed: {
+    setSkip () {
+      if (this.pagination.page <= 0) return 0
+      return (this.pagination.page - 1) * this.pagination.itemsPerPage
+    },
+    setSort () {
+      let sort = this.pagination.sortBy
+      if (!this.pagination.sortBy || this.pagination.sortBy[0] === 'writeTime') sort = '_id'
+      return sort
+    },
+    setOrder () {
+      return this.pagination.sortDesc ? -1 : 1
+    },
+    pages () {
+      if (this.pagination.itemsPerPage == null || this.pagination.totalItems == null) return 0
+      return Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage)
     }
   },
   mounted () {
@@ -227,8 +288,16 @@ export default {
     },
     list () {
       if (this.loading) return
+      if (!this.board._id) return
       this.loading = true
-      this.$axios.get(`article/list/${this.board._id}`).then(({ data }) => {
+      this.params.draw++
+      this.params.skip = this.setSkip
+      this.params.limit = this.pagination.itemsPerPage
+      this.params.sort = this.setSort
+      this.params.order = this.setOrder
+      console.log(this.params)
+      this.$axios.get(`article/list/${this.board._id}`, { params: this.params }).then(({ data }) => {
+        if (!data.success) throw new Error(data.msg)
         data.ds.forEach((r) => {
           // 우선 모델링 새로하기 귀찮아서 이렇게 했는데 이거 되게 비효율적이야
           r.writeTime = this.id2date(r._id)
@@ -238,12 +307,19 @@ export default {
             r.writeUser = r._user.id
           }
         })
+        this.pagination.totalItems = data.t
         this.articles = data.ds
         this.loading = false
       }).catch((e) => {
         this.pop(e.message, 'error')
         this.loading = false
       })
+    },
+    delay () {
+      clearTimeout(this.timeout)
+      this.timeout = setTimeout(() => {
+        this.list()
+      }, 1000)
     },
     read (atc) {
       this.bindTempforAtc = atc

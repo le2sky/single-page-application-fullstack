@@ -5,7 +5,7 @@ import axios from 'axios'
 
 Vue.use(VueRouter)
 Vue.prototype.$axios = axios
-const apiRootPath = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000/api/' : '/api/'
+const apiRootPath = process.env.NODE_ENV !== 'production' ? 'https://modernweb-ohfpx.run.goorm.io/api/' : '/api/'
 Vue.prototype.$apiRootPath = apiRootPath
 axios.defaults.baseURL = apiRootPath
 // axios.defaults.headers.common['Authorization'] = localStorage.getItem('token')
@@ -97,8 +97,7 @@ const routes = [
   {
     path: '/board/:name',
     name: 'board',
-    component: () => import('../views/board'),
-    beforeEnter: pageCheck
+    component: () => import('../views/board')
   },
   // {
   //   path: '/header',

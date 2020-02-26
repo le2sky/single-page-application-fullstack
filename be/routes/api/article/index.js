@@ -43,7 +43,7 @@ router.get('/list/:_board', (req, res, next) => {
     const s = {}
     s[sort] = order
     // ex) s.title = -1 제목으로 내림차순 정렬해!
-
+    console.log(s)
     const f = {}
     if (_board) f._board = _board
     let total = 0 //total data initial setting

@@ -8,6 +8,7 @@ const moment = require('moment')
 //로그인을 할때는 토큰 검사가 필요없음.
 router.use('/sign', require('./sign'));
 router.use('/register', require('./register'))
+router.use('/board', require('./board'));
 
 
 const signToken = (_id, id, lv, name, exp) => {
@@ -69,7 +70,6 @@ router.use('/test', require('./test'));
 router.use('/page', require('./page'));
 router.use('/manage', require('./manage'));
 router.use('/site', require('./site'));
-router.use('/board', require('./board'));
 router.use('/article', require('./article'));
 
 router.all('/', (req, res, next) => {

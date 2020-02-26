@@ -122,6 +122,7 @@ export default {
   name: 'App',
   mounted () {
     this.getSite()
+    this.getBoards()
   },
   data () {
     return {
@@ -141,15 +142,7 @@ export default {
         {
           action: 'chat',
           group_title: '게시판',
-          subItems: [
-            {
-              icon: 'home',
-              title: '전부',
-              to: {
-                path: '/anyone'
-              }
-            }
-          ]
+          subItems: []
         },
         {
           action: 'pan_tool',
@@ -228,6 +221,20 @@ export default {
     signOut () {
       this.$store.commit('delToken')
       this.$router.push('/sign')
+    },
+    getBoards () {
+      this.$axios.get('/board/list').then(({ data }) => {
+        data.ds.forEach((v) => {
+          this.items[0].subItems.push({
+            title: v.name,
+            to: {
+              path: `/board/${v.name}`
+            }
+          })
+        })
+      }).catch((e) => {
+        console.error(e.message)
+      })
     }
   }
 }

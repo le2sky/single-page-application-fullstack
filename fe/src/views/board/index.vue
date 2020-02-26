@@ -207,10 +207,12 @@ export default {
       },
       bindTempforAtc: '',
       // 페이징
+      clearByIdAsc: false,
       pagination: {
         page: 1,
         itemsPerPage: 5,
-        totalItems: 0
+        totalItems: 0,
+        sortDesc: false
       },
       params: {
         draw: 0,
@@ -234,6 +236,9 @@ export default {
       handler () {
         this.delay()
       }
+    },
+    '$route' (to, from) {
+      this.get()
     }
   },
   computed: {
@@ -241,17 +246,19 @@ export default {
       if (this.pagination.page <= 0) return 0
       return (this.pagination.page - 1) * this.pagination.itemsPerPage
     },
-    setSort () {
-      let sort = this.pagination.sortBy
-      if (!this.pagination.sortBy || this.pagination.sortBy[0] === 'writeTime') sort = '_id'
-      return sort
+    pages () {
+      if (this.pagination.itemsPerPage == null || this.pagination.totalItems == null) return 0
+      return Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage)
     },
     setOrder () {
       return this.pagination.sortDesc ? -1 : 1
     },
-    pages () {
-      if (this.pagination.itemsPerPage == null || this.pagination.totalItems == null) return 0
-      return Math.ceil(this.pagination.totalItems / this.pagination.itemsPerPage)
+    setSort () {
+      let sort = this.pagination.sortBy
+      if (!this.pagination.sortBy || this.pagination.sortBy[0] === 'writeTime' || this.pagination.sortBy[0] === undefined) {
+        sort = '_id'
+      }
+      return sort
     }
   },
   mounted () {
@@ -266,7 +273,7 @@ export default {
       }
     },
     get () {
-      this.$axios.get('board/아무나')
+      this.$axios.get(`board/read/${this.$route.params.name}`)
         .then(({ data }) => {
           if (!data.success) throw new Error(data.msg)
           this.board = data.d
@@ -295,7 +302,6 @@ export default {
       this.params.limit = this.pagination.itemsPerPage
       this.params.sort = this.setSort
       this.params.order = this.setOrder
-      console.log(this.params)
       this.$axios.get(`article/list/${this.board._id}`, { params: this.params }).then(({ data }) => {
         if (!data.success) throw new Error(data.msg)
         data.ds.forEach((r) => {

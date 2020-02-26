@@ -95,9 +95,9 @@ const routes = [
     beforeEnter: pageCheck
   },
   {
-    path: '/anyone',
-    name: 'boardAnyone',
-    component: () => import('../views/board/Anyone.vue'),
+    path: '/board/:name',
+    name: 'board',
+    component: () => import('../views/board'),
     beforeEnter: pageCheck
   },
   // {

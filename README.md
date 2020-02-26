@@ -42,7 +42,7 @@
 
 ### 프로젝트하면서 배운점
     backend에 대한 지식
-        - 토큰 인증, 암호화, RestfulApi 만들기(회원가입, 로그인, 관리) , http-error 처리, 라우팅, express 지식, 모듈화, 서버튜닝 기초
+        - 토큰 인증, 암호화, RestfulApi 만들기(회원가입, 로그인, 관리) , http-error 처리, 라우팅, express 지식, 모듈화, 서버튜닝 기초, mongodb, mongoose... etc
     front에 대한 지식
         - vue에대한 이해도 -> vuex, vue router, axios, moment.js, 컴포넌트 프레임워크 (vuetify)
 

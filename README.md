@@ -17,7 +17,7 @@
      name: 'input name'
     },
     jwt: {
-     secretKey: 'inpust ur secretKey',
+     secretKey: 'input ur secretKey',
      issuer: 'homeless-leesky',
      subject: 'user-token',
      algorithm: 'input ur jwt algorithm', /

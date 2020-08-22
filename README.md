@@ -1,6 +1,7 @@
 # Modern-web-development✨
  Develop a modern web using express for Node.js, Vue.js, and mongoDB.
- 2020.03.05 부로 프로젝트 종료함
+ <br>
+ 2020.03.05 부로 프로젝트 종료
 <hr>
 
 <img src="./structure.JPG" />

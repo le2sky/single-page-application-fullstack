@@ -22,6 +22,6 @@
   "homepage": "https://github.com/homeless-leesky/Modern-web-development#readme",
   "dependencies": {
     "cross-env": "^7.0.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.2"
   }
 }
